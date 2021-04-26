@@ -22,7 +22,7 @@ router.post('/create', validateSession, (req, res) => {
 });
 
 // /* ***************************************
-//  ***GET ALL ENTRIES ***
+//  ***GET ALL ENTRIES; ) ***
 //  *************************************** */
 // router.get("/", (req, res) => {
 //     Beer.findAll()
@@ -30,15 +30,14 @@ router.post('/create', validateSession, (req, res) => {
 //         .catch(err => res.status(500).json({ error: err }))
 // });
 
-/* ************************
- ***GET ENTRIES BY USER***
- ************************* */
+
+// GET LISTINGS BY USER
 router.get("/mine", validateSession, (req, res) => {
     let userid = req.user.id
     Listings.findAll({
         where: { owner: userid }
     })
-        .then(beers => res.status(200).json(beers))
+        .then(listings => res.status(200).json(listings))
         .catch(err => res.status(500).json({ error: err }))
 });
 

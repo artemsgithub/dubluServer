@@ -10,7 +10,6 @@ router.post("/register", function (req, res) {
   console.log("req body", req.body);
   User.create({
     email: req.body.user.email,
-
     password: bcrypt.hashSync(req.body.user.password, 13),
   })
     .then(function createSuccess(user) {

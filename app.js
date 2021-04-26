@@ -6,9 +6,10 @@ require("dotenv").config();
 
 let listings = require('./controllers/listingscontroller')
 let user = require('./controllers/usercontroller');
+let configs = require('./controllers/configcontroller')
 
 sequelize.sync();
- //sequelize.sync({ force: true });
+//  sequelize.sync({ force: true });
 app.use(require('./middleware/headers'));
 
 // enable CORS using npm package
@@ -22,6 +23,7 @@ app.use('/user', user)
 
 // PROTECTED ROUTES
 app.use('/listings', listings)
+app.use('/configs', configs)
 
 
 app.listen(process.env.PORT, () => {
