@@ -18,4 +18,19 @@ router.post('/createconfig', validateSession, (req, res) => {
         .catch(err => res.status(500).json({ error: err }))
 });
 
+// GET CONFIG BY USER
+
+router.get("/myConfigs", validateSession, (req, res) => {
+    let userid = req.user.id
+    Config.findAll({
+        where: { owner: userid }
+    })
+        .then(configs => res.status(200).json(configs))
+        .catch(err => res.status(500).json({ error: err }))
+});
+
+// EDIT CONFIG 
+
+
+
 module.exports = router
