@@ -31,6 +31,19 @@ router.get("/myConfigs", validateSession, (req, res) => {
 
 // EDIT CONFIG 
 
+router.put('/edit/', validateSession, (req, res) => {
+    const editConfig = {
+        interestRate: req.body.config.interestRate,
+        downPmt: req.body.config.downPmt,
+        insuranceRate: req.body.config.insuranceRate,
+        owner: req.user.id,
+    };
+    const query = { where: { owner: req.user.id } }
+    Config.update(editConfig, query)
+        .then(configs => res.status(200).json(configs))
+        .catch(err => res.status(500).json({ error: err }))
+});
+
 
 
 module.exports = router
