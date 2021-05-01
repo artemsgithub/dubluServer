@@ -1,17 +1,17 @@
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define("config", {
     interestRate: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL,
       allowNull: false,
     },
 
     downPmt: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL,
       allowNull: false,
     },
 
     insuranceRate: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL,
         allowNull: false,
     },
 

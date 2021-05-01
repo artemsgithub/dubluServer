@@ -16,7 +16,7 @@ router.post("/register", function (req, res) {
       let token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
         expiresIn: 60 * 60 * 24,
       });
-
+    
       res.json({
         user: user,
         message: "User successfully created!",
@@ -24,6 +24,7 @@ router.post("/register", function (req, res) {
       });
     })
     .catch((err) => res.status(500).json({ error: err }));
+
 });
 
 /*  -------  USER LOGIN  ---------  */

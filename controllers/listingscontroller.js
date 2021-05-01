@@ -43,17 +43,18 @@ router.get("/mine", validateSession, (req, res) => {
 
 
 // EDIT CONTROLER
-router.put("/edit/:entryId", validateSession, function (req, res) {
-    const editBeer = {
-        name: req.body.beer.name,
-        location: req.body.beer.location,
-        type: req.body.beer.type,
-        rating: req.body.beer.rating,
-        comments: req.body.beer.comments,
+router.put("/edit/", validateSession, function (req, res) {
+    const editListing = {
+        propertyAddress: req.body.listing.propertyAddress,
+        comments: req.body.listing.comments,
+        askingPrice: req.body.listing.askingPrice,
+        semiTax: req.body.listing.semiTax,
+        estIncome: req.body.listing.estIncome,
+        owner: req.user.id
     };
-    const query = { where: { id: req.params.entryId, owner: req.user.id } }
-    Beer.update(editBeer, query)
-        .then((beers) => res.status(200).json(beers))
+    const query = { where: { owner: req.user.id } }
+    Listings.update(editListing, query)
+        .then((listing) => res.status(200).json(listing))
         .catch((err) => res.status(500).json({ error: err }))
 })
 
@@ -61,8 +62,8 @@ router.put("/edit/:entryId", validateSession, function (req, res) {
 router.delete("/delete/:id", validateSession, function (req, res) {
     const query = { where: { id: req.params.id, owner: req.user.id } };
 
-    Beer.destroy(query)
-        .then(() => res.status(200).json({ message: "Beer Entry Removed" }))
+    Listings.destroy(query)
+        .then(() => res.status(200).json({ message: "Removed listing" }))
         .catch((err) => res.status(500).json({ error: err }))
 })
 
