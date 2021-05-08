@@ -35,7 +35,7 @@ router.post('/create', validateSession, (req, res) => {
 router.get("/mine", validateSession, (req, res) => {
     let userid = req.user.id
     Listings.findAll({
-        where: { owner: userid }
+        where: { owner: userid },
     })
         .then(listings => res.status(200).json(listings))
         .catch(err => res.status(500).json({ error: err }))
@@ -43,7 +43,7 @@ router.get("/mine", validateSession, (req, res) => {
 
 
 // EDIT CONTROLER
-router.put("/edit/", validateSession, function (req, res) {
+router.put("/edit/:id", validateSession, function (req, res) {
     const editListing = {
         propertyAddress: req.body.listing.propertyAddress,
         comments: req.body.listing.comments,
@@ -52,7 +52,7 @@ router.put("/edit/", validateSession, function (req, res) {
         estIncome: req.body.listing.estIncome,
         owner: req.user.id
     };
-    const query = { where: { owner: req.user.id } }
+    const query = { where: { id: req.params.id, owner: req.user.id } }
     Listings.update(editListing, query)
         .then((listing) => res.status(200).json(listing))
         .catch((err) => res.status(500).json({ error: err }))
