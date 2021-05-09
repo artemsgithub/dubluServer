@@ -3,10 +3,13 @@ require("dotenv").config()
 
 
 
-const sequelize = new Sequelize(process.env.DB_NAME, 'postgres', process.env.MY_PASS, {
-    host: 'localhost',
-    dialect: 'postgres'
-});
+const sequelize = new Sequelize(
+    process.env.DATABASE_URL || 
+    `postgresql://postgres:${encodeURIComponent(process.env.DB_PASS)}@localhost/dublu`,
+    {
+        dialect: 'postgres'
+    }
+)
 
 sequelize.authenticate().then(
    
