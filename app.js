@@ -7,6 +7,8 @@ require("dotenv").config();
 let listings = require('./controllers/listingscontroller')
 let user = require('./controllers/usercontroller');
 let configs = require('./controllers/configcontroller')
+let admin = require('./controllers/admincontroller')
+
 
 sequelize.sync();
 //  sequelize.sync({ force: true });
@@ -24,6 +26,8 @@ app.use('/user', user)
 // PROTECTED ROUTES
 app.use('/listings', listings)
 app.use('/configs', configs)
+app.use('/admin', admin)
+
 
 
 app.listen(process.env.PORT, () => {
