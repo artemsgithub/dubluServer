@@ -2,10 +2,8 @@ const Sequelize = require('sequelize');
 require("dotenv").config()
 
 
-
 const sequelize = new Sequelize(
-    process.env.DATABASE_URL || 
-    `postgresql://postgres:${encodeURIComponent(process.env.DB_PASS)}@localhost/dublu`,
+    process.env.DATABASE_URL,
     {
         dialect: 'postgres',
   dialectOptions: !process.env.DATABASE_URL.includes('localhost') ? {
